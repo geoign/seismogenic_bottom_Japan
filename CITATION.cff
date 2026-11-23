@@ -6,7 +6,7 @@ authors:
   - family-names: Ikegami
     given-names: Fumihiko
     affiliation: Ikegami GeoResearch
-repository-code: "https://github.com/geoign/JMA_seismogenic_bottom_2001-2024"
+repository-code: "https://github.com/geoign/seismogenic_bottom_Japan"
 license: CC-BY-4.0
 version: "1.0.0"
 date-released: "2026-11-23"

@@ -259,7 +259,7 @@ cores, the 0.025-degree fit about 45 minutes, and `run_hires.ps1` about 75 minut
 Please cite this repository (see [CITATION.cff](CITATION.cff)) together with the input data:
 
 Ikegami, F. (2026). Lower limit of brittle seismicity beneath the Japanese islands (based on JMA
-unified catalogue 2001-2024). https://github.com/geoign/JMA_seismogenic_bottom_2001-2024
+unified catalogue 2001-2024). https://github.com/geoign/seismogenic_bottom_Japan
 
 ## Acknowledgements and references of the inputs
 
