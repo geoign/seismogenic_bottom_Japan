@@ -1,4 +1,4 @@
-Lower limit of brittle seismicity beneath the Japanese islands (JMA unified catalogue 2001-2024) - data licence
+Lower limit of brittle seismicity beneath the Japanese islands (based on JMA unified catalogue 2001-2024) - data licence
 
 Copyright (c) 2026 Fumihiko Ikegami (Ikegami GeoResearch)
 
@@ -15,16 +15,19 @@ Full text of the licence: https://creativecommons.org/licenses/by/4.0/legalcode
 Suggested credit:
 
     Ikegami, F. (2026). Lower limit of brittle seismicity beneath the Japanese islands
-    (JMA unified catalogue 2001-2024). https://github.com/geoign/JMA_seismogenic_bottom_2001-2024
+    (based on JMA unified catalogue 2001-2024). https://github.com/geoign/JMA_seismogenic_bottom_2001-2024
 
 Material from other sources
 
 The products are derived from data of other providers, which are not redistributed here and whose
-terms continue to apply to them:
+terms continue to apply to them. The products are an independent work by the author; they are not
+products of these providers and have not been reviewed or endorsed by them.
 
 - Hypocentres: unified hypocenter catalogue of the Japan Meteorological Agency, compiled from data
   of JMA, the National Research Institute for Earth Science and Disaster Resilience, universities
-  and other institutions.
+  and other institutions. Source: Japan Meteorological Agency website
+  (https://www.data.jma.go.jp/eqev/data/bulletin/hypo.html). Created by F. Ikegami based on this
+  catalogue (events selected, declustered and model-fitted by the author).
 - Slab-top depths used for the slab mask and the band slab_top_km: Slab2 (Hayes et al. 2018, U.S.
   Geological Survey) and the plate-configuration models distributed by F. Hirose (Meteorological
   Research Institute).

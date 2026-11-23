@@ -80,7 +80,7 @@ ncol = 3; nrow = int(np.ceil(len(panels) / ncol))
 fig = plt.figure(figsize=(6.2 * ncol, 5.8 * nrow))
 for i, (a, title, vmin, vmax, cmap) in enumerate(panels, start=1):
     panel(axes(fig, (nrow, ncol, i)), a, title, vmin, vmax, cmap)
-fig.suptitle(f"Lower limit of brittle seismicity, JMA unified catalogue 2001-2024 (upper plate, family-weighted ML fit, {step:g}-degree nodes)", fontsize=13)
+fig.suptitle(f"Lower limit of brittle seismicity based on JMA unified catalogue 2001-2024 (upper plate, family-weighted ML fit, {step:g}-degree nodes)", fontsize=13)
 fig.tight_layout()
 fig.savefig(args.prefix + "_overview.png", dpi=130)
 print("saved", args.prefix + "_overview.png")

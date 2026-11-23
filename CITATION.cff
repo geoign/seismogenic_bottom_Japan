@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use these maps or the code, please cite them as below, together with the input data listed in the README."
-title: "Lower limit of brittle seismicity beneath the Japanese islands (JMA unified catalogue 2001-2024)"
+title: "Lower limit of brittle seismicity beneath the Japanese islands (based on JMA unified catalogue 2001-2024)"
 type: dataset
 authors:
   - family-names: Ikegami
@@ -16,7 +16,8 @@ abstract: >-
   2001-2024. At every node a soft-bottomed depth distribution is fitted by weighted maximum
   likelihood, with aftershock sequences down-weighted by nearest-neighbour declustering. The
   primary product D_b10 is the depth at which the modelled brittle rate falls to 10 percent, a
-  model-based counterpart of D90. The code is under the MIT licence.
+  model-based counterpart of D90. The code is under the MIT licence. This is an independent work
+  by the author, not a product of the Japan Meteorological Agency.
 keywords:
   - seismogenic zone
   - brittle-ductile transition

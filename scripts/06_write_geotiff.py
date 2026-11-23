@@ -65,12 +65,14 @@ ds.SetGeoTransform((float(lons[0]) - step / 2, step, 0.0, float(lats[0]) + step 
 srs = osr.SpatialReference(); srs.ImportFromEPSG(4326); ds.SetProjection(srs.ExportToWkt())
 ds.SetMetadata({
     "AREA_OR_POINT": "Point",
-    "TITLE": "Lower limit of brittle seismicity beneath the Japanese islands (JMA unified catalogue 2001-2024)",
+    "TITLE": "Lower limit of brittle seismicity beneath the Japanese islands (based on JMA unified catalogue 2001-2024)",
     "METHOD": "Weighted maximum-likelihood fit of f(z) = (1-p) Phi((z-z_t)/s_t)[1-Phi((z-z_b)/s_b)]/norm + p/60 "
               "to upper-plate hypocentres within an adaptive radius; weights = 1/family size from "
               "nearest-neighbour declustering (Zaliapin & Ben-Zion 2013)",
-    "SOURCE": "JMA unified hypocenter catalogue (depth-free, ordinary events, flags K/k/A), Slab2 (Hayes et al. 2018) "
-              "and Hirose/Nakajima plate models for the slab mask",
+    "SOURCE": "Created by F. Ikegami based on the JMA unified hypocenter catalogue "
+              "(https://www.data.jma.go.jp/eqev/data/bulletin/hypo.html; depth-free, ordinary events, flags K/k/A), "
+              "Slab2 (Hayes et al. 2018) and Hirose/Nakajima plate models for the slab mask. "
+              "Independent work, not a product of the Japan Meteorological Agency",
     "UNITS": "km (depth positive down), except p_outlier (fraction), ESS, n_events and radius_km",
 })
 for i, (name, arr, desc) in enumerate(bands, start=1):

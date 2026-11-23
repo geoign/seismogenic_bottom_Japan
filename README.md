@@ -1,10 +1,14 @@
-# Lower limit of brittle seismicity beneath the Japanese islands (JMA unified catalogue 2001-2024)
+# Lower limit of brittle seismicity beneath the Japanese islands (based on JMA unified catalogue 2001-2024)
 
 Maps of the depth at which ordinary (brittle) earthquakes die out beneath Japan, on 0.1-degree and
 0.025-degree nodes, with the code that makes them. Instead of a percentile (D90) of the raw
 catalogue, the depth distribution at every node is fitted with a soft-bottomed model by maximum
 likelihood, and aftershock sequences are down-weighted so that one large sequence cannot dominate
 a node.
+
+The maps are an independent work by the author, made from the publicly available unified
+hypocenter catalogue of the Japan Meteorological Agency (JMA). They are not a product of JMA or of
+any other data provider, and have not been reviewed or endorsed by them.
 
 ![D_b10 on 0.1-degree nodes](maps/seismogenic_bottom_Db10.png)
 
@@ -254,10 +258,14 @@ cores, the 0.025-degree fit about 45 minutes, and `run_hires.ps1` about 75 minut
 
 Please cite this repository (see [CITATION.cff](CITATION.cff)) together with the input data:
 
-Ikegami, F. (2026). Lower limit of brittle seismicity beneath the Japanese islands (JMA unified
-catalogue 2001-2024). https://github.com/geoign/JMA_seismogenic_bottom_2001-2024
+Ikegami, F. (2026). Lower limit of brittle seismicity beneath the Japanese islands (based on JMA
+unified catalogue 2001-2024). https://github.com/geoign/JMA_seismogenic_bottom_2001-2024
 
 ## Acknowledgements and references of the inputs
+
+Source: Japan Meteorological Agency website (<https://www.data.jma.go.jp/eqev/data/bulletin/hypo.html>).
+The maps were created by F. Ikegami based on the JMA unified hypocenter catalogue; the hypocentres
+were selected, declustered and model-fitted by the author as described above.
 
 The hypocentres are from the unified hypocenter catalogue of the Japan Meteorological Agency, which
 JMA compiles from data of the National Research Institute for Earth Science and Disaster Resilience,

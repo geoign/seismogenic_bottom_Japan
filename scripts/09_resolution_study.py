@@ -119,7 +119,7 @@ if os.path.exists(p):
     im = ax.imshow(rmin, extent=extent(r), origin="upper", cmap=cmap, norm=norm, interpolation="nearest", zorder=0)
     cb = plt.colorbar(im, ax=ax, shrink=0.75, pad=0.02, ticks=radii)
     cb.set_label("smallest search radius reaching ESS >= 30 (km)")
-    ax.set_title("Data-limited resolution of the seismogenic-bottom map (JMA 2001-2024, upper plate, declustered)\n"
+    ax.set_title("Data-limited resolution of the seismogenic-bottom map (based on JMA catalogue 2001-2024, upper plate, declustered)\n"
                  "colour = smallest radius at which a 0.025-degree node has 30 independent families; "
                  "blank = not reached within 40 km", fontsize=11)
     fig.tight_layout(); fig.savefig(os.path.join(args.out, "resolution_limit_rmin.png"), dpi=150); plt.close(fig)
