@@ -1,0 +1,9 @@
+# Versions used for the published run (Python 3.14). The GDAL Python bindings (osgeo) are also
+# needed by 05, 06, 08 and 09; install them with your GDAL distribution or from conda-forge.
+numpy>=2.0
+scipy>=1.11
+pandas>=2.0
+numba>=0.60
+scikit-learn>=1.3
+rasterio>=1.3
+matplotlib>=3.8

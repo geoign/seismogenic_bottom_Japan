@@ -1,0 +1,13 @@
+# inputs and intermediate files (not redistributed; see README)
+raw/
+slab2/
+plate_data/
+work/
+*.npz
+GSHHS_*
+
+# Python and GIS side files
+__pycache__/
+*.pyc
+*.aux.xml
+*.log

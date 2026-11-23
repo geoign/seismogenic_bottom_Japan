@@ -1,0 +1,191 @@
+== pipeline log (parse / filter / decluster / fit), 2026-11-22
+depth-free solution                keep   4064828 / 4672464
+ordinary (non-LFE, non-artificial) keep   4491588 / 4672464
+flag K/k/A                         keep   4291818 / 4672464
+0 <= depth <= 60 km                keep   4362030 / 4672464
+s.e. dep<=3.0, h<=5.0 km           keep   3875294 / 4672464
+region box                         keep   4626140 / 4672464
+all of the above                   keep   3356032 / 4672464
+depth s.e. quantiles (selected) 50/90/99 %: [0.92 2.02 2.86]
+kur: 2018995 events under this slab model
+izu: 423162 events under this slab model
+ryu: 1788031 events under this slab model
+phi: 0 events under this slab model
+Hirose PHS: 1165840 events under this surface, 634304 where it is shallower than Slab2
+Hirose PAC: 3228318 events under this surface, 439845 where it is shallower than Slab2
+above slab top (with margin): keep 2428185 / 3356032
+saved C:/tmp/jma_d90/work/upper_plate_v2.npz 2428185 events
+depth quantiles 50/90/99 %: [ 9.46 17.27 36.53]
+magnitude quantiles 10/50/90 %: [0.  0.7 1.8]
+2428185 events, 468 parents with M>=5, 11738 cells
+  200000/2428185 events (2003-12-04) after 2 s
+  400000/2428185 events (2007-02-02) after 3 s
+  600000/2428185 events (2009-12-17) after 4 s
+  800000/2428185 events (2011-07-21) after 7 s
+  1000000/2428185 events (2013-05-26) after 12 s
+  1200000/2428185 events (2016-04-16) after 13 s
+  1400000/2428185 events (2017-02-17) after 18 s
+  1600000/2428185 events (2018-06-11) after 25 s
+  1800000/2428185 events (2020-04-06) after 28 s
+  2000000/2428185 events (2021-11-02) after 32 s
+  2200000/2428185 events (2023-06-19) after 37 s
+  2400000/2428185 events (2024-10-09) after 42 s
+  2428185/2428185 events (2024-12-31) after 42 s
+nearest-neighbour search done in 42 s
+114 events without any earlier neighbour in the window (treated as background)
+log10 eta quantiles 5/25/50/75/95 %: [-8.24219745 -6.38128182 -4.94746173 -3.7749681  -2.85601355]
+GMM: means [-6.64806831 -4.00966703], sd [1.27893014 0.90532518], weights [0.43909566 0.56090434] -> threshold log10 eta0 = -5.35
+log10 eta0 = -5.35: 1030129 clustered events (42.4 %)
+1398056 families; largest 88826 events; effective sample size 1470557
+  family 708606: 88826 events, largest M7.3 at 2016-04-16T01:25:05.470 (32.75N 130.76E 12 km)
+  family 437435: 82865 events, largest M7.3 at 2011-03-09T11:45:12.970 (38.33N 143.28E 8 km)
+  family 1266394: 80860 events, largest M7.6 at 2024-01-01T16:10:22.570 (37.50N 137.27E 16 km)
+  family 319124: 33534 events, largest M7.2 at 2008-06-14T08:43:45.360 (39.03N 140.88E 8 km)
+  family 1025243: 31134 events, largest M5.5 at 2020-04-23T13:44:22.140 (36.23N 137.66E 3 km)
+  family 750068: 28581 events, largest M6.6 at 2016-10-21T14:07:22.570 (35.38N 133.86E 11 km)
+  family 756925: 21586 events, largest M7.4 at 2016-11-22T05:59:46.890 (37.35N 141.60E 24 km)
+  family 763206: 20374 events, largest M6.3 at 2016-12-28T21:38:49.040 (36.72N 140.57E 11 km)
+saved C:/tmp/jma_d90/work/upper_plate_v2_declustered.npz
+221x261 grid, 13141 nodes with >= 60 events within 40.0 km
+fitted 13131 nodes in 165 s
+saved C:/tmp/jma_d90/work/fit_v3_0p1.npz
+221x261 grid, 13141 nodes with >= 60 events within 40.0 km
+fitted 13141 nodes in 165 s
+saved C:/tmp/jma_d90/work/fit_v3_0p1_noweights.npz
+
+== flag statistics of the final grid
+valid nodes 12284  flag==0: 7027  bit1 slab-limited: 4301  bit2 deep>30km: 811  bit4 wide: 492  bit8 ESS<50: 362
+
+===== high-resolution runs (run_hires.ps1), 2026-11-22 =====
+=== fine 0.025  start 2026-11-22 20:17:33
+881x1041 grid, 210133 nodes with >= 60 events within 40.0 km
+fitted 209938 nodes in 2495 s
+saved C:\tmp\jma_d90\work\fit_v3_0p025.npz
+=== fine 0.025  end   2026-11-22 20:59:36  exit 0
+=== full r=2  start 2026-11-22 20:59:36
+221x261 grid, 693 nodes with >= 60 events within 2.0 km
+fitted 654 nodes in 14 s
+saved C:\tmp\jma_d90\work\fit_full_r2_0p1.npz
+=== full r=2  end   2026-11-22 20:59:52  exit 0
+=== half0 r=2  start 2026-11-22 20:59:52
+221x261 grid, 697 nodes with >= 30 events within 2.0 km
+fitted 664 nodes in 13 s
+saved C:\tmp\jma_d90\work\fit_half0_r2_0p1.npz
+=== half0 r=2  end   2026-11-22 21:00:06  exit 0
+=== half1 r=2  start 2026-11-22 21:00:06
+221x261 grid, 660 nodes with >= 30 events within 2.0 km
+fitted 639 nodes in 12 s
+saved C:\tmp\jma_d90\work\fit_half1_r2_0p1.npz
+=== half1 r=2  end   2026-11-22 21:00:19  exit 0
+=== full r=3  start 2026-11-22 21:00:19
+221x261 grid, 1316 nodes with >= 60 events within 3.0 km
+fitted 1273 nodes in 22 s
+saved C:\tmp\jma_d90\work\fit_full_r3_0p1.npz
+=== full r=3  end   2026-11-22 21:00:43  exit 0
+=== half0 r=3  start 2026-11-22 21:00:43
+221x261 grid, 1293 nodes with >= 30 events within 3.0 km
+fitted 1255 nodes in 19 s
+saved C:\tmp\jma_d90\work\fit_half0_r3_0p1.npz
+=== half0 r=3  end   2026-11-22 21:01:04  exit 0
+=== half1 r=3  start 2026-11-22 21:01:04
+221x261 grid, 1298 nodes with >= 30 events within 3.0 km
+fitted 1273 nodes in 19 s
+saved C:\tmp\jma_d90\work\fit_half1_r3_0p1.npz
+=== half1 r=3  end   2026-11-22 21:01:24  exit 0
+=== full r=5  start 2026-11-22 21:01:24
+221x261 grid, 2729 nodes with >= 60 events within 5.0 km
+fitted 2694 nodes in 40 s
+saved C:\tmp\jma_d90\work\fit_full_r5_0p1.npz
+=== full r=5  end   2026-11-22 21:02:07  exit 0
+=== half0 r=5  start 2026-11-22 21:02:07
+221x261 grid, 2738 nodes with >= 30 events within 5.0 km
+fitted 2687 nodes in 36 s
+saved C:\tmp\jma_d90\work\fit_half0_r5_0p1.npz
+=== half0 r=5  end   2026-11-22 21:02:44  exit 0
+=== half1 r=5  start 2026-11-22 21:02:44
+221x261 grid, 2712 nodes with >= 30 events within 5.0 km
+fitted 2678 nodes in 35 s
+saved C:\tmp\jma_d90\work\fit_half1_r5_0p1.npz
+=== half1 r=5  end   2026-11-22 21:03:20  exit 0
+=== full r=10  start 2026-11-22 21:03:20
+221x261 grid, 5784 nodes with >= 60 events within 10.0 km
+fitted 5752 nodes in 75 s
+saved C:\tmp\jma_d90\work\fit_full_r10_0p1.npz
+=== full r=10  end   2026-11-22 21:04:38  exit 0
+=== half0 r=10  start 2026-11-22 21:04:38
+221x261 grid, 5784 nodes with >= 30 events within 10.0 km
+fitted 5738 nodes in 72 s
+saved C:\tmp\jma_d90\work\fit_half0_r10_0p1.npz
+=== half0 r=10  end   2026-11-22 21:05:52  exit 0
+=== half1 r=10  start 2026-11-22 21:05:52
+221x261 grid, 5730 nodes with >= 30 events within 10.0 km
+fitted 5712 nodes in 72 s
+saved C:\tmp\jma_d90\work\fit_half1_r10_0p1.npz
+=== half1 r=10  end   2026-11-22 21:07:05  exit 0
+=== full r=20  start 2026-11-22 21:07:05
+221x261 grid, 9335 nodes with >= 60 events within 20.0 km
+fitted 9321 nodes in 119 s
+saved C:\tmp\jma_d90\work\fit_full_r20_0p1.npz
+=== full r=20  end   2026-11-22 21:09:06  exit 0
+=== half0 r=20  start 2026-11-22 21:09:06
+221x261 grid, 9380 nodes with >= 30 events within 20.0 km
+fitted 9361 nodes in 119 s
+saved C:\tmp\jma_d90\work\fit_half0_r20_0p1.npz
+=== half0 r=20  end   2026-11-22 21:11:07  exit 0
+=== half1 r=20  start 2026-11-22 21:11:07
+221x261 grid, 9270 nodes with >= 30 events within 20.0 km
+fitted 9251 nodes in 117 s
+saved C:\tmp\jma_d90\work\fit_half1_r20_0p1.npz
+=== half1 r=20  end   2026-11-22 21:13:05  exit 0
+=== half0 fine kyushu  start 2026-11-22 21:13:05
+121x121 grid, 14138 nodes with >= 30 events within 40.0 km
+fitted 14138 nodes in 178 s
+saved C:\tmp\jma_d90\work\fit_half0_0p025_kyushu.npz
+=== half0 fine kyushu  end   2026-11-22 21:16:05  exit 0
+=== half1 fine kyushu  start 2026-11-22 21:16:05
+121x121 grid, 14150 nodes with >= 30 events within 40.0 km
+fitted 14150 nodes in 179 s
+saved C:\tmp\jma_d90\work\fit_half1_0p025_kyushu.npz
+=== half1 fine kyushu  end   2026-11-22 21:19:06  exit 0
+=== half0 fine tohoku_kanto  start 2026-11-22 21:19:06
+201x161 grid, 32034 nodes with >= 30 events within 40.0 km
+fitted 32034 nodes in 380 s
+saved C:\tmp\jma_d90\work\fit_half0_0p025_tohoku_kanto.npz
+=== half0 fine tohoku_kanto  end   2026-11-22 21:25:30  exit 0
+=== half1 fine tohoku_kanto  start 2026-11-22 21:25:30
+201x161 grid, 32032 nodes with >= 30 events within 40.0 km
+fitted 32032 nodes in 386 s
+saved C:\tmp\jma_d90\work\fit_half1_0p025_tohoku_kanto.npz
+=== half1 fine tohoku_kanto  end   2026-11-22 21:31:59  exit 0
+=== ALL DONE 2026-11-22 21:31:59
+
+===== resolution limits (08) =====
+events 2428185
+horizontal s.e. (km) quantiles 10/50/75/90/95: [0.25 0.44 0.73 1.18 1.5 ]
+depth s.e. (km) quantiles 10/50/75/90/95: [0.45 0.85 1.29 1.86 2.26]
+r =    2 km: nodes reaching ESS >= 30 so far   10440, pending  906681  (1 s)
+r =    3 km: nodes reaching ESS >= 30 so far   20372, pending  896749  (3 s)
+r =    4 km: nodes reaching ESS >= 30 so far   31638, pending  885483  (4 s)
+r =    5 km: nodes reaching ESS >= 30 so far   42933, pending  874188  (5 s)
+r =    7 km: nodes reaching ESS >= 30 so far   64689, pending  852432  (7 s)
+r =   10 km: nodes reaching ESS >= 30 so far   92329, pending  824792  (8 s)
+r =   15 km: nodes reaching ESS >= 30 so far  125691, pending  791430  (10 s)
+r =   20 km: nodes reaching ESS >= 30 so far  149374, pending  767747  (12 s)
+r =   30 km: nodes reaching ESS >= 30 so far  183921, pending  733200  (13 s)
+r =   40 km: nodes reaching ESS >= 30 so far  209938, pending  707183  (15 s)
+land nodes: 194582
+saved work/resolution_limits_0p025.npz
+
+fraction of nodes whose data-limited resolution is <= r (cumulative):
+  r (km)  all nodes  land nodes   land, Honshu-Kyushu-Shikoku (130-142E, 31-41.5N)
+       2       5.0%        3.7%                                              14.8%
+       3       9.7%        6.8%                                              26.6%
+       4      15.1%       10.3%                                              39.0%
+       5      20.5%       13.5%                                              50.3%
+       7      30.8%       18.9%                                              68.3%
+      10      44.0%       24.4%                                              85.0%
+      15      59.9%       28.7%                                              96.1%
+      20      71.2%       30.3%                                              98.9%
+      30      87.6%       31.2%                                              99.8%
+      40     100.0%       31.4%                                              99.9%
+    none      77.1%       68.6%                                               0.1%
