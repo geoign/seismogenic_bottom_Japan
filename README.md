@@ -16,9 +16,9 @@ any other data provider, and have not been reviewed or endorsed by them.
 
 | File | Content |
 | --- | --- |
-| `JMA_seismogenic_bottom_2001-2024_0p1deg.tif` | 19-band Float32 GeoTIFF, EPSG:4326, pixel-is-point on 0.1-degree nodes (122-148E, 24-46N), ZSTD; search radius 10-40 km |
-| `JMA_seismogenic_bottom_2001-2024_0p025deg.tif` | **high-resolution version**: same bands on 0.025-degree nodes (about 2.8 x 2.3 km), search radius 3-40 km (adaptive); see "Spatial resolution" |
-| `JMA_seismogenic_bottom_2001-2024_0p1deg_noweights.tif` | 0.1-degree fit without family weights (every event weight 1), for comparison |
+| `seismogenic_bottom_Japan_2001-2024_0p1deg.tif` | 19-band Float32 GeoTIFF, EPSG:4326, pixel-is-point on 0.1-degree nodes (122-148E, 24-46N), ZSTD; search radius 10-40 km |
+| `seismogenic_bottom_Japan_2001-2024_0p025deg.tif` | **high-resolution version**: same bands on 0.025-degree nodes (about 2.8 x 2.3 km), search radius 3-40 km (adaptive); see "Spatial resolution" |
+| `seismogenic_bottom_Japan_2001-2024_0p1deg_noweights.tif` | 0.1-degree fit without family weights (every event weight 1), for comparison |
 | `maps/seismogenic_bottom_Db10.png`, `maps/seismogenic_bottom_zb.png` | single maps (0.1 deg); grey = nodes whose bottom is set by the slab mask or by a deep (> 30 km) population |
 | `maps/seismogenic_bottom_overview.png` | diagnostic panels (0.1 deg) |
 | `maps/seismogenic_bottom_0p025_*.png` | the same three figures for the 0.025-degree product |
@@ -63,7 +63,7 @@ Python:
 ```python
 import rasterio
 
-with rasterio.open("JMA_seismogenic_bottom_2001-2024_0p1deg.tif") as src:
+with rasterio.open("seismogenic_bottom_Japan_2001-2024_0p1deg.tif") as src:
     band = {name: i for i, name in enumerate(src.descriptions, start=1)}
     d_b10 = src.read(band["D_b10_clean"])   # km, NaN outside valid nodes
     row, col = src.index(131.08, 32.88)     # Aso caldera
@@ -230,9 +230,9 @@ python scripts/04_fit_seismogenic_bottom.py work/upper_plate_declustered.npz wor
 python scripts/04_fit_seismogenic_bottom.py work/upper_plate_declustered.npz work/fit_v3_0p025.npz --step 0.025 --workers 20 --radii 3,5,7,10,15,20,30,40
 
 # GeoTIFFs, figures, reference-site tables
-python scripts/06_write_geotiff.py work/fit_v3_0p1.npz JMA_seismogenic_bottom_2001-2024_0p1deg.tif
-python scripts/06_write_geotiff.py work/fit_v3_0p1_noweights.npz JMA_seismogenic_bottom_2001-2024_0p1deg_noweights.tif
-python scripts/06_write_geotiff.py work/fit_v3_0p025.npz JMA_seismogenic_bottom_2001-2024_0p025deg.tif
+python scripts/06_write_geotiff.py work/fit_v3_0p1.npz seismogenic_bottom_Japan_2001-2024_0p1deg.tif
+python scripts/06_write_geotiff.py work/fit_v3_0p1_noweights.npz seismogenic_bottom_Japan_2001-2024_0p1deg_noweights.tif
+python scripts/06_write_geotiff.py work/fit_v3_0p025.npz seismogenic_bottom_Japan_2001-2024_0p025deg.tif
 python scripts/05_plot_maps.py work/fit_v3_0p1.npz maps/seismogenic_bottom --coast GSHHS_i_L1.shp --compare work/fit_v3_0p1_noweights.npz
 python scripts/05_plot_maps.py work/fit_v3_0p025.npz maps/seismogenic_bottom_0p025 --coast GSHHS_i_L1.shp
 python scripts/07_poi_table.py work/fit_v3_0p1.npz reference_sites.md
