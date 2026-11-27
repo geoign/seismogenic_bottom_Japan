@@ -25,6 +25,7 @@ any other data provider, and have not been reviewed or endorsed by them.
 | `reference_sites.md`, `reference_sites_0p025deg.md` | fitted values at 27 reference sites, both products |
 | `resolution_study/` | how far the resolution can be pushed: `resolution_study.md` (tables), `resolution_limit_rmin.png` (data-limited resolution map), `splithalf_kyushu.png`, `splithalf_tohoku_kanto.png` (reproducibility of the fine map between two independent halves of the catalogue) |
 | `scripts/` | processing chain (see "Reproducing the maps"); `08_*`, `09_*` and `run_hires.ps1` belong to the resolution study |
+| `thermal/` | conversion of `D_b10` into heat flow, geothermal gradient and isotherm depths (see "Thermal conversion"): `thermal_from_seismogenic_bottom_Japan_0p1deg.tif` (12 bands), `thermal_conversion.md` (calibration, sensitivity, checks), `thermal_maps.png`, `thermal_calibration.png` |
 | `work_summary.txt` | processing log (event counts, declustering statistics, run times) |
 
 ### GeoTIFF bands
@@ -88,6 +89,11 @@ node.
 * GSHHG shorelines (Wessel & Smith 1996, <https://www.soest.hawaii.edu/pwessel/gshhg/>),
   intermediate resolution, level 1: coastlines of the figures and the land mask of the resolution
   study only.
+* Thermal conversion only: the Global Heat Flow Database, Release 2021 (Fuchs, Norden & International
+  Heat Flow Commission 2021, <https://doi.org/10.5880/fidgeo.2021.014>, CC BY 4.0), the gridded
+  strain-rate field of Ohtate et al. (2026, Supplementary Material 3,
+  <https://doi.org/10.1186/s40623-026-02475-y>, CC BY 4.0) and, as a check, the Curie-point depth
+  model of Li et al. (2017, <https://doi.org/10.1038/srep45129>).
 
 None of the input data are redistributed here.
 
@@ -181,6 +187,60 @@ location scatter takes over. Two caveats apply to reading the fine texture:
   large sequences is reproduced for physical, not statistical, reasons. The 0.1-degree
   `_noweights` comparison remains the check for sequence dominance.
 
+## Thermal conversion
+
+![Heat flow, gradient and 350 deg C depth converted from D_b10](thermal/thermal_maps.png)
+
+`thermal/` holds an experimental conversion of the 0.1-degree `D_b10` into thermal quantities
+(`scripts/10_thermal_conversion.py`; all numbers and checks in `thermal/thermal_conversion.md`).
+
+1. `D_b10` (quality flag 0, onshore, Gaussian-smoothed with a sigma of one node) is taken as the
+   depth of an isotherm `T_c`.
+2. `T_c` follows a power-law flow law with the stress set by friction:
+   `1/T_c = 1/T_ref + (R/Q) [n ln(z / 15 km) - ln(eps / eps_ref)]`, with n = 3 and Q = 356 kJ/mol
+   (wet anorthite, Rybacki & Dresen 2000) and `eps` the second invariant of the geodetic strain
+   rate (Ohtate et al. 2026). The two terms move `T_c` by about +-20 deg C over the map.
+3. A steady-state conductive geotherm with exponentially decaying heat production (k = 2.5 W/m/K,
+   A0 = 2 microW/m3, hr = 10 km) is pinned at the surface and at (`D_b10`, `T_c`).
+4. `T_ref`, the only free parameter, is calibrated so that the predicted surface heat flow matches
+   the node medians of onshore heat-flow observations (Global Heat Flow Database 2021; 161 nodes).
+
+The result is `T_ref` = 427 deg C (95 % interval 395-476 deg C). Calibrated the same way, the
+classic D90 corresponds to 397 deg C, `z_b` to 360 deg C and `D_b90` to 277 deg C, so the transition
+fitted by the model spans roughly 280-430 deg C and the often quoted 350 deg C sits near its centre,
+not at its base.
+
+| Band | Name | Meaning |
+| --- | --- | --- |
+| 1 | `heat_flow_mWm2` | surface heat flow (median 79, 5-95 %: 54-110 mW/m2) |
+| 2 | `gradient_surface_Cperkm` | gradient at the surface, heat flow / k (median 32 deg C/km) |
+| 3 | `gradient_mean_Cperkm` | mean gradient between the surface and `D_b10` (median 28 deg C/km) |
+| 4 | `depth_350C_km` | depth of the 350 deg C isotherm (median 11.8 km, about 0.80 x `D_b10`) |
+| 5 | `depth_580C_km` | depth of the 580 deg C isotherm, extrapolated below `D_b10` (median 20.9 km) |
+| 6 | `T_at_D_b10_C` | temperature assigned to `D_b10` |
+| 7, 8 | `heat_flow_lo_mWm2`, `heat_flow_hi_mWm2` | heat flow with `T_ref` at the ends of its 95 % interval |
+| 9 | `depth_350C_shallow_km` | depth of 350 deg C with `T_ref` at the upper end of its interval |
+| 10 | `depth_350C_deep_km` | depth of 350 deg C with k = 3.0 W/m/K (`T_ref` recalibrated to 358 deg C) |
+| 11 | `D_b10_smoothed_km` | input depth |
+| 12 | `strain_rate_nstrain_per_yr` | input strain rate (second invariant, smoothed) |
+
+How far to trust it:
+
+* The heat-flow grid is anchored to observations and does not depend on the assumed conductivity.
+  Against single heat-flow sites it scatters by a factor of 1.55 (robust), most of which is the
+  scatter of the sites themselves; the rank correlation is +0.57.
+* The gradient and the isotherm depths do depend on the conductivity. With k = 3.0 W/m/K the
+  calibration gives `T_ref` = 358 deg C and the 350 deg C isotherm at 0.97 x `D_b10`; that setting
+  also reproduces the regional median of the Curie-point depth model of Li et al. (2017), 25 km,
+  which k = 2.5 underestimates by 4 km. The temperature at `D_b10` is therefore bracketed between
+  about 360 and 430 deg C, and bands 9-10 bracket the 350 deg C depth.
+* Fitted freely, the strain-rate term comes out several times larger than any flow law predicts.
+  Hot, weak crust strains faster, and the geodetic field contains elastic and post-seismic strain,
+  so this is read as an association with heat flow and is not used.
+* One-dimensional steady conduction does not hold next to hydrothermal systems and young
+  intrusions, nor in the fore-arc; lithology is not modelled, so nodes with `D_b10` deeper than
+  about 25 km are unreliable; the 0.025-degree product should not be converted this way.
+
 ## Caveats
 
 * Depths are JMA routine (1-D velocity model) depths; offsets of 1-3 km relative to 3-D relocated
@@ -242,6 +302,9 @@ python scripts/07_poi_table.py work/fit_v3_0p025.npz reference_sites_0p025deg.md
 python scripts/08_resolution_limits.py work/upper_plate_declustered.npz work/resolution_limits_0p025.npz --coast GSHHS_i_L1.shp
 pwsh scripts/run_hires.ps1 -Work work -Workers 20
 python scripts/09_resolution_study.py work resolution_study --coast GSHHS_i_L1.shp
+
+# thermal conversion (heat-flow database, strain-rate grid and Curie-depth GeoTIFF obtained separately)
+python scripts/10_thermal_conversion.py seismogenic_bottom_Japan_2001-2024_0p1deg.tif IHFC_2021_GHFDB.csv 40623_2026_2475_MOESM3_ESM.xyz thermal --curie curie_depth.tif --coast GSHHS_i_L1.shp
 ```
 
 The declustering takes under a minute (numba, parallel), the 0.1-degree fit about 3 minutes on 20
@@ -251,7 +314,7 @@ cores, the 0.025-degree fit about 45 minutes, and `run_hires.ps1` about 75 minut
 ## Licence
 
 * Code (`scripts/`): MIT licence, see [LICENSE](LICENSE).
-* Data products (the GeoTIFFs, `maps/`, `resolution_study/`, the reference-site tables): Creative
+* Data products (the GeoTIFFs, `maps/`, `resolution_study/`, `thermal/`, the reference-site tables): Creative
   Commons Attribution 4.0 International (CC BY 4.0), see [LICENSE-DATA](LICENSE-DATA).
 
 ## How to cite
@@ -279,6 +342,8 @@ others (see the notes of the JMA seismological bulletin).
 * Baba, T., Tanioka, Y., Cummins, P. R. & Uhira, K. (2002) The slip distribution of the 1946 Nankai
   earthquake estimated from tsunami inversion using a new plate model. Phys. Earth Planet. Inter.
   132, 59-73.
+* Fuchs, S., Norden, B. & International Heat Flow Commission (2021) The Global Heat Flow Database:
+  Release 2021. GFZ Data Services, https://doi.org/10.5880/fidgeo.2021.014
 * Hayes, G. P. et al. (2018) Slab2, a comprehensive subduction zone geometry model. Science 362,
   58-61. Data release: https://doi.org/10.5066/F7PV6JNV
 * Hirose, F., Nakajima, J. & Hasegawa, A. (2008a) Three-dimensional velocity structure and
@@ -291,6 +356,8 @@ others (see the notes of the JMA seismological bulletin).
 * Kita, S., Okada, T., Hasegawa, A., Nakajima, J. & Matsuzawa, T. (2010) Anomalous deepening of a
   seismic belt in the upper-plane of the double seismic zone in the Pacific slab beneath the
   Hokkaido corner. Earth Planet. Sci. Lett. 290, 415-426.
+* Li, C.-F., Lu, Y. & Wang, J. (2017) A global reference model of Curie-point depths based on
+  EMAG2. Sci. Rep. 7, 45129, https://doi.org/10.1038/srep45129
 * Nakajima, J. & Hasegawa, A. (2006) Anomalous low-velocity zone and linear alignment of seismicity
   along it in the subducted Pacific slab beneath Kanto, Japan. Geophys. Res. Lett. 33, L16309,
   https://doi.org/10.1029/2006GL026773
@@ -300,6 +367,11 @@ others (see the notes of the JMA seismological bulletin).
 * Nakajima, J., Hirose, F. & Hasegawa, A. (2009) Seismotectonics beneath the Tokyo metropolitan
   area, Japan: effect of slab-slab contact and overlap on seismicity. J. Geophys. Res. 114, B08309,
   https://doi.org/10.1029/2008JB006101
+* Ohtate, M., Ohta, Y., Ohzono, M. & Takahashi, H. (2026) Fine-scale strain-rate mapping of Japan
+  from integrated public-private GNSS stations. Earth Planets Space 78, 210,
+  https://doi.org/10.1186/s40623-026-02475-y
+* Rybacki, E. & Dresen, G. (2000) Dislocation and diffusion creep of synthetic anorthite
+  aggregates. J. Geophys. Res. 105, 26017-26036.
 * Wessel, P. & Smith, W. H. F. (1996) A global, self-consistent, hierarchical, high-resolution
   shoreline database. J. Geophys. Res. 101, 8741-8743.
 * Zaliapin, I. & Ben-Zion, Y. (2013) Earthquake clusters in southern California I: identification

@@ -2,10 +2,10 @@ Lower limit of brittle seismicity beneath the Japanese islands (based on JMA uni
 
 Copyright (c) 2026 Fumihiko Ikegami (Ikegami GeoResearch)
 
-The data products of this repository - the GeoTIFF files, the figures under maps/ and
-resolution_study/, the tables reference_sites.md, reference_sites_0p025deg.md and
-resolution_study/resolution_study.md, and work_summary.txt - are licensed under the Creative Commons
-Attribution 4.0 International Licence (CC BY 4.0).
+The data products of this repository - the GeoTIFF files, the figures under maps/,
+resolution_study/ and thermal/, the tables reference_sites.md, reference_sites_0p025deg.md,
+resolution_study/resolution_study.md and thermal/thermal_conversion.md, and work_summary.txt - are
+licensed under the Creative Commons Attribution 4.0 International Licence (CC BY 4.0).
 
 You may share and adapt the data for any purpose, provided that you give appropriate credit,
 provide a link to the licence, and indicate if changes were made.
@@ -32,3 +32,11 @@ products of these providers and have not been reviewed or endorsed by them.
   Geological Survey) and the plate-configuration models distributed by F. Hirose (Meteorological
   Research Institute).
 - Coastlines in the figures: GSHHG (Wessel & Smith 1996), GNU Lesser General Public License.
+- Files under thermal/: calibrated against onshore heat-flow observations of the Global Heat Flow
+  Database, Release 2021 (Fuchs, Norden & International Heat Flow Commission 2021, GFZ Data
+  Services, https://doi.org/10.5880/fidgeo.2021.014, CC BY 4.0); node medians of these observations
+  are plotted in the figures. The strain-rate term and the band strain_rate_nstrain_per_yr are
+  derived from the gridded strain-rate field of Ohtate et al. (2026, Earth Planets Space 78:210,
+  https://doi.org/10.1186/s40623-026-02475-y, CC BY 4.0); the author computed the second invariant,
+  regridded it to 0.1 degree and smoothed it. The Curie-point depth model of Li et al. (2017,
+  https://doi.org/10.1038/srep45129) is used for a comparison of regional medians only.
