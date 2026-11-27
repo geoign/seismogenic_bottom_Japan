@@ -249,7 +249,7 @@ for band, label in [("D_b10", "D_b10 (10 % of the plateau rate)"), ("D90_weighte
     zz, ll, _ = prepared(band)
     gg = node_table(zz, ll)
     b_, bo_, _ = calibrate(gg, K, A0, HR, nboot=max(200, args.boot // 5), seed=1)
-    lo_, hi_ = np.percentile(bo_[:, 0], [2.5, 97.5])
+    lo_, hi_ = (T_LO, T_HI) if band == "D_b10" else np.percentile(bo_[:, 0], [2.5, 97.5])
     say(f"| {label} | {np.nanmedian(zz):.1f} | {b_[0]:.0f} | {lo_:.0f}-{hi_:.0f} |")
 say("")
 

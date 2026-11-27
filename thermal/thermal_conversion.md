@@ -15,7 +15,7 @@ The same calibration applied to other depth statistics of the same product (cons
 
 | Depth statistic | Median depth over the domain (km) | Calibrated T_ref (deg C) | 95 % interval |
 | --- | --- | --- | --- |
-| D_b10 (10 % of the plateau rate) | 14.8 | 427 | 395-479 |
+| D_b10 (10 % of the plateau rate) | 14.8 | 427 | 395-476 |
 | classic D90 (family-weighted) | 13.5 | 397 | 359-435 |
 | z_b (centre of the transition) | 12.4 | 360 | 335-392 |
 | D_b90 (top of the transition) | 10.1 | 277 | 262-303 |
